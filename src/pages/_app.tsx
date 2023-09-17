@@ -1,6 +1,19 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 
+import { WagmiProvider } from 'wagmi' 
+import { config } from '../wagmi/config' 
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query' 
+
+const queryClient = new QueryClient() 
+
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <WagmiProvider value={config}>
+      <QueryClientProvider client={queryClient}> 
+        <Component {...pageProps} />
+      </QueryClientProvider> 
+    </WagmiProvider>
+  )
 }
