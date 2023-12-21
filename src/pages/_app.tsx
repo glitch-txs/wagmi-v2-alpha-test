@@ -10,7 +10,7 @@ const queryClient = new QueryClient()
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <WagmiProvider value={config}>
+    <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}> 
         <Component {...pageProps} />
       </QueryClientProvider> 

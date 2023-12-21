@@ -1,14 +1,12 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
-
-import { useConnect, useAccount, useConfig, useChainId } from 'wagmi'
-import {disconnect} from '@wagmi/core'
+import { useConnect, useAccount, useDisconnect } from 'wagmi'
 
 export default function Home() {
+
   const { connect, connectors } = useConnect()
   const { address, chainId, status } = useAccount()
-  const config = useConfig()
-  const d = useChainId()
+  const { disconnect } = useDisconnect()
 
   return (
     <>
@@ -24,7 +22,7 @@ export default function Home() {
           {connector.name}
         </button>
       ))}
-      {address && <button onClick={()=>disconnect(config)} >Disconnect</button>}
+      {address && <button onClick={()=>disconnect()} >Disconnect</button>}
       <div>Address: {address}</div>
       <div>Chain ID: {chainId}</div>
       <div>Status: {status}</div>
